@@ -29,7 +29,7 @@ public class ClientConverter implements IClientConverter {
     public Client convertToClient(IClientDTO clientDTO) {
         Mapper mapper = DozerBeanMapperBuilder.buildDefault();
         Client client = mapper.map(clientDTO, Client.class);
-        return client.init(this.betaalrekeningFactory);
+        return client.initAfterMap(this.betaalrekeningFactory);
     }
 
     @Override

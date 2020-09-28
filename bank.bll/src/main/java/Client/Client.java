@@ -18,9 +18,6 @@ public class Client implements IClient {
     private List<Betaalrekening> betaalrekeningen;
     private IBetaalrekeningFactory betaalRekeningFactory;
 
-    public Client() {
-    }
-
     public Client(String naam, LocalDate geboortedatum, IBetaalrekeningFactory betaalRekeningFactory) {
         this.clientNummer = UUID.randomUUID();
         this.naam = naam;
@@ -29,8 +26,12 @@ public class Client implements IClient {
         this.betaalRekeningFactory = betaalRekeningFactory;
     }
 
+    public Client() {
+        // used for mapping from DTO
+    }
+
     @Override
-    public Client init(IBetaalrekeningFactory betaalrekeningFactory) {
+    public Client initAfterMap(IBetaalrekeningFactory betaalrekeningFactory) {
         this.betaalRekeningFactory = betaalrekeningFactory;
         this.betaalrekeningen = new LinkedList<>();
         return this;
