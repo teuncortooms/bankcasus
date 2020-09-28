@@ -1,5 +1,7 @@
 package Client;
 
+import ClientDTO.IClientDTO;
+
 import java.util.List;
 
 public interface IClientConverter {

@@ -2,7 +2,7 @@ package Client;
 
 import Exceptions.RekeningNietGevondenException;
 import Rekening.Betaalrekening.Betaalrekening;
-import Rekening.Betaalrekening.IBetaalRekeningFactory;
+import Rekening.Betaalrekening.IBetaalrekeningFactory;
 import Rekening.Spaarrekening.ISpaarrekeningFactory;
 
 import java.math.BigDecimal;
@@ -12,34 +12,49 @@ import java.util.List;
 import java.util.UUID;
 
 public class Client implements IClient {
-    private final String naam;
-    private final LocalDate geboortedatum;
-    private final UUID clientNummer;
-    private final List<Betaalrekening> betaalrekeningen;
-    private final IBetaalRekeningFactory betaalRekeningFactory;
+    private String naam;
+    private LocalDate geboortedatum;
+    private UUID clientNummer;
+    private List<Betaalrekening> betaalrekeningen;
+    private IBetaalrekeningFactory betaalRekeningFactory;
 
-    public UUID getClientNummer() {
-        return this.clientNummer;
+    public Client() {
     }
 
-    public List<Betaalrekening> getBetaalrekeningen() {
-        return this.betaalrekeningen;
-    }
-
-    public Client(){
-        this.clientNummer = null;
-        this.naam = null;
-        this.geboortedatum = null;
-        this.betaalrekeningen = null;
-        this.betaalRekeningFactory = null;
-    }
-
-    public Client(String naam, LocalDate geboortedatum, IBetaalRekeningFactory betaalRekeningFactory) {
+    public Client(String naam, LocalDate geboortedatum, IBetaalrekeningFactory betaalRekeningFactory) {
         this.clientNummer = UUID.randomUUID();
         this.naam = naam;
         this.geboortedatum = geboortedatum;
         this.betaalrekeningen = new LinkedList<>();
         this.betaalRekeningFactory = betaalRekeningFactory;
+    }
+
+    @Override
+    public Client init(IBetaalrekeningFactory betaalrekeningFactory) {
+        this.betaalRekeningFactory = betaalrekeningFactory;
+        this.betaalrekeningen = new LinkedList<>();
+        return this;
+    }
+
+    public String getNaam() {
+        return this.naam;
+    }
+
+    public LocalDate getGeboortedatum() {
+        return this.geboortedatum;
+    }
+
+    public UUID getClientNummer() {
+        return this.clientNummer;
+    }
+
+    public void setNaam(String value){this.naam = value;}
+    public void setGeboortedatum(LocalDate value){this.geboortedatum = value;}
+    public void setClientNummer(UUID value){this.clientNummer = value;}
+
+
+    public List<Betaalrekening> getBetaalrekeningen() {
+        return this.betaalrekeningen;
     }
 
     public Betaalrekening getBetaalrekening(UUID betaalrekeningNummer) throws RekeningNietGevondenException {

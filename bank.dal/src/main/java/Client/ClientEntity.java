@@ -1,6 +1,6 @@
 package Client;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import ClientDTO.IClientDTO;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -11,8 +11,6 @@ import java.util.UUID;
 public class ClientEntity implements IClientDTO {
     private UUID clientNummer;
     private String naam;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate geboortedatum;
@@ -23,7 +21,6 @@ public class ClientEntity implements IClientDTO {
     }
 
     @Override
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     public LocalDate getGeboortedatum() {
         return this.geboortedatum;
     }
@@ -39,7 +36,6 @@ public class ClientEntity implements IClientDTO {
     }
 
     @Override
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     public void setGeboortedatum(LocalDate datum) {
         this.geboortedatum = datum;
     }

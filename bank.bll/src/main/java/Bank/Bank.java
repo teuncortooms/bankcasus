@@ -24,6 +24,10 @@ public class Bank implements IBank {
         return clientCollection.getClient(clientNummer);
     }
 
+    public Client getClient(String naam) throws ClientNietGevondenException, IOException {
+        return clientCollection.getClient(naam);
+    }
+
     public Client aanmeldenClient(String naam, LocalDate geboortedatum) throws IOException {
         return clientCollection.addClient(naam, geboortedatum);
     }

@@ -1,6 +1,6 @@
 package Mocks;
 
-import Client.IClientDTO;
+import ClientDTO.IClientDTO;
 
 import java.time.LocalDate;
 import java.util.Random;

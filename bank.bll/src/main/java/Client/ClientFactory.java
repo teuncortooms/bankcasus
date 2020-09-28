@@ -1,17 +1,13 @@
 package Client;
 
-import Rekening.Betaalrekening.IBetaalRekeningFactory;
-import org.dozer.DozerBeanMapper;
-
+import Rekening.Betaalrekening.IBetaalrekeningFactory;
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
 
 public class ClientFactory implements IClientFactory {
 
-    private final IBetaalRekeningFactory betaalrekeningFactory;
+    private final IBetaalrekeningFactory betaalrekeningFactory;
 
-    public ClientFactory(IBetaalRekeningFactory betaalrekeningFactory){
+    public ClientFactory(IBetaalrekeningFactory betaalrekeningFactory){
         this.betaalrekeningFactory = betaalrekeningFactory;
     }
 

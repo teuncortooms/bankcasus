@@ -1,11 +1,20 @@
 package Client;
 
-import org.dozer.DozerBeanMapper;
-
+import ClientDTO.ClientDTO;
+import ClientDTO.IClientDTO;
+import Rekening.Betaalrekening.IBetaalrekeningFactory;
+import com.github.dozermapper.core.DozerBeanMapperBuilder;
+import com.github.dozermapper.core.Mapper;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ClientConverter implements IClientConverter {
+
+    private final IBetaalrekeningFactory betaalrekeningFactory;
+
+    public ClientConverter(IBetaalrekeningFactory betaalrekeningFactory) {
+        this.betaalrekeningFactory = betaalrekeningFactory;
+    }
 
     @Override
     public List<Client> convertToClients(List<IClientDTO> clientDTOs) {
@@ -18,8 +27,9 @@ public class ClientConverter implements IClientConverter {
 
     @Override
     public Client convertToClient(IClientDTO clientDTO) {
-        DozerBeanMapper mapper = new DozerBeanMapper();
-        return mapper.map(clientDTO, Client.class);
+        Mapper mapper = DozerBeanMapperBuilder.buildDefault();
+        Client client = mapper.map(clientDTO, Client.class);
+        return client.init(this.betaalrekeningFactory);
     }
 
     @Override
@@ -33,7 +43,7 @@ public class ClientConverter implements IClientConverter {
 
     @Override
     public IClientDTO convertToClientDTO(IClient client) {
-        DozerBeanMapper mapper = new DozerBeanMapper();
+        Mapper mapper = DozerBeanMapperBuilder.buildDefault();
         return mapper.map(client, ClientDTO.class);
     }
 }

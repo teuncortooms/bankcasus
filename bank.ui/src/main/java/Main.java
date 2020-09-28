@@ -1,11 +1,13 @@
 import Bank.IBank;
 import Client.IClient;
+import Exceptions.ClientNietGevondenException;
 import Exceptions.SaldoTeLaagException;
 import Rekening.Betaalrekening.IBetaalrekening;
 import Rekening.Spaarrekening.ISpaarrekening;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,8 +15,7 @@ public class Main {
             CompositionRoot root = new CompositionRoot();
             IBank bank = root.getBank();
 
-            IClient client1 = bank.aanmeldenClient("Teun",
-                    LocalDate.of(1985, 9, 6));
+            IClient client1 = bank.getClient(UUID.fromString("a6db2f93-a21a-4adb-a9bf-a03c0561c0bd"));
             IClient client2 = bank.aanmeldenClient("Pietje",
                     LocalDate.of(1990, 9, 6));
 
@@ -41,6 +42,11 @@ public class Main {
             e.printStackTrace();
         } catch (SaldoTeLaagException e) {
             System.out.println("Saldo te laag");
+            e.printStackTrace();
+        } catch (ClientNietGevondenException e) {
+            System.out.println("Er is een fout opgetreden. " +
+                    "De cliënt kon niet worden gevonden. " +
+                    "Neem contact op met de beheerder.");
             e.printStackTrace();
         }
     }

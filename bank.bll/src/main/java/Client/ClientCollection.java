@@ -1,5 +1,7 @@
 package Client;
 
+import ClientDTO.IClientDTO;
+import ClientDTO.IClientDTOCollection;
 import Exceptions.ClientNietGevondenException;
 import Rekening.Betaalrekening.Betaalrekening;
 
@@ -15,7 +17,7 @@ public class ClientCollection {
 
     public ClientCollection(IClientDTOCollection clientDTOCollection,
                             IClientFactory clientFactory,
-                            IClientConverter clientConverter){
+                            IClientConverter clientConverter) {
         this.clientDTOCollection = clientDTOCollection;
         this.clientFactory = clientFactory;
         this.clientConverter = clientConverter;
@@ -27,9 +29,19 @@ public class ClientCollection {
     }
 
     public Client getClient(UUID clientNummer) throws ClientNietGevondenException, IOException {
-        return this.getAllClients().stream()
-                .filter((c) -> c.getClientNummer() == clientNummer)
+        List<Client> clients = this.getAllClients();
+        return clients.stream()
+                .filter((c) -> c.getClientNummer().equals(clientNummer))
                 .findFirst().orElseThrow(ClientNietGevondenException::new);
+    }
+
+    public Client getClient(String naam) throws ClientNietGevondenException, IOException {
+        List<Client> clients = this.getAllClients();
+        for (var client : clients) {
+            String clientNaam = client.getNaam();
+            if (clientNaam.equalsIgnoreCase(naam)) return client;
+        }
+        throw new ClientNietGevondenException();
     }
 
     public Client addClient(String naam, LocalDate geboortedatum) throws IOException {

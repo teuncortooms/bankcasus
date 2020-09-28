@@ -1,6 +1,11 @@
 package Client;
 
+import ClientDTO.IClientDTO;
+import ClientDTO.IClientDTOCollection;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import java.io.*;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -47,6 +52,8 @@ public class ClientEntityCollection implements IClientDTOCollection {
     private void writeToFile(List<IClientDTO> entities) throws IOException {
         File jsonFile = new File(filename);
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         mapper.writeValue(jsonFile, entities);
     }
 

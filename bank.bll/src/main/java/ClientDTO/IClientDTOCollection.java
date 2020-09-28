@@ -1,4 +1,4 @@
-package Client;
+package ClientDTO;
 
 import java.io.IOException;
 import java.util.List;

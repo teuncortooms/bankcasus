@@ -4,7 +4,7 @@ import Rekening.Spaarrekening.ISpaarrekeningFactory;
 
 import java.math.BigDecimal;
 
-public class BetaalrekeningFactory implements IBetaalRekeningFactory {
+public class BetaalrekeningFactory implements IBetaalrekeningFactory {
 
     private final ISpaarrekeningFactory spaarrekeningFactory;
 

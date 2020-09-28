@@ -2,8 +2,8 @@ package Client;
 
 import Exceptions.RekeningNietGevondenException;
 import Rekening.Betaalrekening.Betaalrekening;
+import Rekening.Betaalrekening.IBetaalrekeningFactory;
 import Rekening.Spaarrekening.ISpaarrekeningFactory;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
@@ -18,4 +18,5 @@ public interface IClient {
     Betaalrekening openBetaalrekening(BigDecimal bedrag);
 
     Betaalrekening openBetaalrekening(BigDecimal bedrag, ISpaarrekeningFactory spaarrekeningFactory);
+    IClient init(IBetaalrekeningFactory betaalrekeningFactory);
 }
