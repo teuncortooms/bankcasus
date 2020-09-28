@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ClientRepositoryTests {
 
-    private String testfile1 =  "/TEST1.json";
+    private String testfile1 =  "target/TEST1.json";
 
     @Test
     void getAllFromEmptyFile() {

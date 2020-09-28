@@ -3,6 +3,7 @@ package Client;
 import Exceptions.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -18,9 +19,10 @@ public class ClientRepository implements IClientRepository {
 
     public List<IClientEntity> getAll() throws FileReaderException {
         ObjectMapper mapper = new ObjectMapper();
+        File jsonFile = new File(filename);
 
         try {
-            InputStream is = ClientRepository.class.getResourceAsStream(filename);
+            InputStream is = new FileInputStream(filename);
             ClientEntity[] array = mapper.readValue(is, ClientEntity[].class);
             return new LinkedList<>(Arrays.asList(array));
         } catch (IOException e) {
@@ -35,11 +37,11 @@ public class ClientRepository implements IClientRepository {
     }
 
     private void writeToFile(List<IClientEntity> clients) throws FileWriterException {
-        String path = ClientRepository.class.getResource(this.filename).getPath(); // TODO: wrong path?
-        File clientsFile = new File(path);
+//        String path = ClientRepository.class.getResource(this.filename).getPath(); // TODO: wrong path?
+        File jsonFile = new File(filename);
         try {
             ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValue(clientsFile, clients);
+            mapper.writeValue(jsonFile, clients);
         } catch (IOException e) {
             e.printStackTrace();
             throw new FileWriterException(e);
