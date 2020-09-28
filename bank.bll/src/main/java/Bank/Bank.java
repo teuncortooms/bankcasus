@@ -2,69 +2,34 @@ package Bank;
 
 import Client.*;
 import Exceptions.ClientNietGevondenException;
-import Exceptions.FileReaderException;
 import Exceptions.RekeningNietGevondenException;
 import Rekening.Betaalrekening.Betaalrekening;
-import Rekening.Betaalrekening.IBetaalRekeningFactory;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 public class Bank implements IBank {
-    private final IClientFactory clientFactory;
-    private final List<Client> clients;
+    private final ClientCollection clientCollection;
 
-    public Bank(IClientRepository clientRepository, IClientFactory clientFactory) throws FileReaderException, IOException {
-        List<IClientEntity> entities = clientRepository.getAll();
-        this.clients = clientFactory.buildList(entities);
-        this.clientFactory = clientFactory;
+    public Bank(ClientCollection clientCollection) {
+        this.clientCollection = clientCollection;
     }
 
-    public Client getClient(UUID clientNummer) throws ClientNietGevondenException {
-        return this.clients.stream()
-                .filter((c) -> c.getClientNummer() == clientNummer)
-                .findFirst().orElseThrow(ClientNietGevondenException::new);
+    public List<Client> getAllClients() throws IOException {
+        return clientCollection.getAllClients();
     }
 
-    public List<Client> getAllClients() {
-        return this.clients;
+    public Client getClient(UUID clientNummer) throws ClientNietGevondenException, IOException {
+        return clientCollection.getClient(clientNummer);
     }
 
-    public Client aanmeldenClient(String naam, LocalDate geboortedatum) {
-        Client client = this.clientFactory.buildNew(naam, geboortedatum);
-        clients.add(client);
-        return client;
+    public Client aanmeldenClient(String naam, LocalDate geboortedatum) throws IOException {
+        return clientCollection.addClient(naam, geboortedatum);
     }
 
-    public Client aanmeldenClient(String naam, LocalDate geboortedatum, IBetaalRekeningFactory betaalrekeningFactory) {
-        Client client = this.clientFactory.buildNew(naam, geboortedatum);
-        clients.add(client);
-        return client;
-    }
-
-    public Betaalrekening findRekening(UUID betaalrekeningNummer) throws ClientNietGevondenException, RekeningNietGevondenException {
-        IClient client = findClient(betaalrekeningNummer);
+    public Betaalrekening findRekening(UUID betaalrekeningNummer) throws ClientNietGevondenException, RekeningNietGevondenException, IOException {
+        IClient client = clientCollection.findClient(betaalrekeningNummer);
         return client.getBetaalrekening(betaalrekeningNummer);
-    }
-
-    private Client findClient(UUID betaalrekeningNummer) throws ClientNietGevondenException {
-        for (var client : this.clients) {
-            if (clientHasRekening(client, betaalrekeningNummer)) {
-                return client;
-            }
-        }
-        throw new ClientNietGevondenException();
-    }
-
-    private boolean clientHasRekening(IClient client, UUID betaalrekeningNummer) {
-        List<Betaalrekening> rekeningen = client.getBetaalrekeningen();
-        for (var rekening : rekeningen) {
-            if (rekening.getRekeningnummer() == betaalrekeningNummer) {
-                return true;
-            }
-        }
-        return false;
     }
 }

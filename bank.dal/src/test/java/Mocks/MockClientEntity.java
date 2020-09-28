@@ -1,16 +1,15 @@
 package Mocks;
 
-import Client.IClientEntity;
+import Client.IClientDTO;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
 
-public class MockClientEntity implements IClientEntity {
+public class MockClientEntity implements IClientDTO {
     private String naam;
-    private Date geboortedatum;
+    private LocalDate geboortedatum;
     private UUID clientNummer;
 
 
@@ -23,8 +22,8 @@ public class MockClientEntity implements IClientEntity {
         int d = 1 + new Random().nextInt(28);
 
         this.naam = names[i];
-//        this.geboortedatum = LocalDate.of(y, m, d);
-                this.geboortedatum = new Date(y, m, d);
+        this.geboortedatum = LocalDate.of(y, m, d);
+//                this.geboortedatum = new Date(y, m, d);
         this.clientNummer = UUID.randomUUID();
     }
 
@@ -34,7 +33,7 @@ public class MockClientEntity implements IClientEntity {
     }
 
     @Override
-    public Date getGeboortedatum() {
+    public LocalDate getGeboortedatum() {
         return this.geboortedatum;
     }
 
@@ -48,7 +47,7 @@ public class MockClientEntity implements IClientEntity {
     }
 
     @Override
-    public void setGeboortedatum(Date datum) {
+    public void setGeboortedatum(LocalDate datum) {
 
     }
 

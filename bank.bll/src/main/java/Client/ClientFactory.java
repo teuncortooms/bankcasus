@@ -19,20 +19,4 @@ public class ClientFactory implements IClientFactory {
     public Client buildNew(String naam, LocalDate geboortedatum) {
         return new Client(naam, geboortedatum, this.betaalrekeningFactory);
     }
-
-    @Override
-    public Client build(IClientEntity clientEntity) {
-        DozerBeanMapper mapper = new DozerBeanMapper();
-        return mapper.map(clientEntity, Client.class);
-    }
-
-    @Override
-    public List<Client> buildList(List<IClientEntity> entities) {
-        List<Client> clients = new LinkedList<>();
-        for (var entity : entities) {
-            clients.add(this.build(entity));
-        }
-        return clients;
-    }
-
 }

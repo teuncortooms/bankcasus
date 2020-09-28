@@ -1,6 +1,5 @@
 import Bank.IBank;
 import Client.IClient;
-import Exceptions.FileReaderException;
 import Exceptions.SaldoTeLaagException;
 import Rekening.Betaalrekening.IBetaalrekening;
 import Rekening.Spaarrekening.ISpaarrekening;
@@ -35,7 +34,7 @@ public class Main {
             System.out.println(betaalrekening2);
             System.out.println(spaarrekening);
 
-        } catch (IOException | FileReaderException e) {
+        } catch (IOException e) {
             System.out.println("Er is een fout opgetreden. " +
                     "Het databestand kan niet worden gelezen. " +
                     "Neem contact op met de beheerder.");

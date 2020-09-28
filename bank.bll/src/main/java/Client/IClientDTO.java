@@ -1,14 +1,13 @@
 package Client;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.UUID;
 
-public interface IClientEntity {
+public interface IClientDTO {
     String getNaam();
-    Date getGeboortedatum();
+    LocalDate getGeboortedatum();
     UUID getClientNummer();
 
     void setNaam(String naam);
-    void setGeboortedatum(Date datum);
+    void setGeboortedatum(LocalDate datum);
     void setClientNummer(UUID id);
 }

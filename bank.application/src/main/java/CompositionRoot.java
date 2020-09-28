@@ -1,10 +1,10 @@
 import Bank.Bank;
+import Client.ClientCollection;
+import Client.ClientConverter;
 import Client.ClientFactory;
-import Client.ClientRepository;
-import Exceptions.FileReaderException;
+import Client.ClientEntityCollection;
 import Rekening.Betaalrekening.BetaalrekeningFactory;
 import Rekening.Spaarrekening.SpaarrekeningFactory;
-
 import java.io.IOException;
 
 public class CompositionRoot {
@@ -14,13 +14,16 @@ public class CompositionRoot {
         return this.bank;
     }
 
-    public CompositionRoot() throws IOException, FileReaderException {
+    public CompositionRoot() throws IOException {
         this.bank = new Bank(
-                new ClientRepository("/clients.json"),
-                new ClientFactory(
-                        new BetaalrekeningFactory(
-                                new SpaarrekeningFactory()
-                        )
+                new ClientCollection(
+                        new ClientEntityCollection("C:\\users\\884573\\Desktop\\testFile.json"),
+                        new ClientFactory(
+                                new BetaalrekeningFactory(
+                                        new SpaarrekeningFactory()
+                                )
+                        ),
+                        new ClientConverter()
                 )
         );
     }
