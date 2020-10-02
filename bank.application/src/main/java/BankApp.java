@@ -5,6 +5,7 @@ import Rekening.Betaalrekening.IBetaalrekening;
 import Rekening.Spaarrekening.ISpaarrekening;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
 public class BankApp {
     Bank bank;
 
-    public BankApp() throws IOException {
+    public BankApp() throws IOException, URISyntaxException {
         CompositionRoot root = new CompositionRoot();
         this.bank = root.getBank();
     }

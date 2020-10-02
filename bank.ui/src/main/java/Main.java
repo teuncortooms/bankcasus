@@ -6,6 +6,7 @@ import Rekening.Betaalrekening.IBetaalrekening;
 import Rekening.Spaarrekening.ISpaarrekening;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -46,6 +47,11 @@ public class Main {
         } catch (ClientNietGevondenException e) {
             System.out.println("Er is een fout opgetreden. " +
                     "De cliënt kon niet worden gevonden. " +
+                    "Neem contact op met de beheerder.");
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            System.out.println("Er is een fout opgetreden. " +
+                    "De configuratiefile kan niet worden gelezen. " +
                     "Neem contact op met de beheerder.");
             e.printStackTrace();
         }
