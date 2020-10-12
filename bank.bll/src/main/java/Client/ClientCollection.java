@@ -1,7 +1,7 @@
 package Client;
 
 import ClientDTO.IClientDTO;
-import ClientDTO.IClientDTOCollection;
+import ClientDTO.IClientDTORepository;
 import Exceptions.ClientNietGevondenException;
 import Rekening.Betaalrekening.Betaalrekening;
 
@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.UUID;
 
 public class ClientCollection {
-    private final IClientDTOCollection clientDTOCollection;
+    private final IClientDTORepository clientDTOCollection;
     private final IClientFactory clientFactory;
     private final IClientConverter clientConverter;
 
-    public ClientCollection(IClientDTOCollection clientDTOCollection,
+    public ClientCollection(IClientDTORepository clientDTOCollection,
                             IClientFactory clientFactory,
                             IClientConverter clientConverter) {
         this.clientDTOCollection = clientDTOCollection;

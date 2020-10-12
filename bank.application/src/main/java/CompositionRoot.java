@@ -2,10 +2,9 @@ import Bank.Bank;
 import Client.ClientCollection;
 import Client.ClientConverter;
 import Client.ClientFactory;
-import Client.ClientEntityCollection;
+import Client.ClientEntityRepository;
 import Rekening.Betaalrekening.BetaalrekeningFactory;
 import Rekening.Spaarrekening.SpaarrekeningFactory;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -27,7 +26,7 @@ public class CompositionRoot {
 
         this.bank = new Bank(
                 new ClientCollection(
-                        new ClientEntityCollection(getSourceFile()),
+                        new ClientEntityRepository(getSourceFile()),
                         new ClientFactory(betaalrekeningFactory),
                         new ClientConverter(betaalrekeningFactory)
                 ));

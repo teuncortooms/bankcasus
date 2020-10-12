@@ -1,7 +1,7 @@
 package Client;
 
 import ClientDTO.IClientDTO;
-import ClientDTO.IClientDTOCollection;
+import ClientDTO.IClientDTORepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -11,10 +11,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ClientEntityCollection implements IClientDTOCollection {
+public class ClientEntityRepository implements IClientDTORepository {
     private final String filename;
 
-    public ClientEntityCollection(String filename) {
+    public ClientEntityRepository(String filename) {
         this.filename = filename;
     }
 

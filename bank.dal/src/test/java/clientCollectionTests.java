@@ -1,4 +1,4 @@
-import Client.ClientEntityCollection;
+import Client.ClientEntityRepository;
 import ClientDTO.IClientDTO;
 import Mocks.MockClientEntity;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class ClientCollectionTests {
 
     @Test
     void getAllFromEmptyFile() {
-        ClientEntityCollection r = new ClientEntityCollection(emptyFile);
+        ClientEntityRepository r = new ClientEntityRepository(emptyFile);
 
         try {
             List<IClientDTO> clients = r.getAll();
@@ -30,7 +30,7 @@ class ClientCollectionTests {
 
     @Test
     void getAllFromNonEmptyFileTEST1() {
-        ClientEntityCollection r = new ClientEntityCollection(TEST1);
+        ClientEntityRepository r = new ClientEntityRepository(TEST1);
 
         try {
             List<IClientDTO> clients = r.getAll();
@@ -46,7 +46,7 @@ class ClientCollectionTests {
 
     @Test
     void addClient() {
-        ClientEntityCollection r = new ClientEntityCollection(TEST1);
+        ClientEntityRepository r = new ClientEntityRepository(TEST1);
         IClientDTO client = new MockClientEntity();
 
         try {
@@ -59,7 +59,7 @@ class ClientCollectionTests {
 
     @Test
     void addClientInEmptyFile() {
-        ClientEntityCollection r = new ClientEntityCollection(TEST1);
+        ClientEntityRepository r = new ClientEntityRepository(TEST1);
         IClientDTO client = new MockClientEntity();
 
         try {
