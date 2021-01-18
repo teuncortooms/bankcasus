@@ -14,7 +14,8 @@ import java.util.List;
 public class ClientEntityRepository implements IClientDTORepository {
     private final String filename;
 
-    public ClientEntityRepository(String filename) {
+    public ClientEntityRepository(String filename)
+    {
         this.filename = filename;
     }
 
@@ -38,7 +39,6 @@ public class ClientEntityRepository implements IClientDTORepository {
     }
 
     private void createDummyFile(File jsonFile) throws IOException {
-        jsonFile.createNewFile();
         String str = "[{\"naam\":\"Jan\"},{\"naam\":\"Jorrit\"}]";
         writeToFile(str);
     }

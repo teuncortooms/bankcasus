@@ -11,20 +11,20 @@ import java.util.List;
 import java.util.UUID;
 
 public class ClientCollection {
-    private final IClientDTORepository clientDTOCollection;
+    private final IClientDTORepository dtoRepository;
     private final IClientFactory clientFactory;
     private final IClientConverter clientConverter;
 
-    public ClientCollection(IClientDTORepository clientDTOCollection,
+    public ClientCollection(IClientDTORepository dtoRepository,
                             IClientFactory clientFactory,
                             IClientConverter clientConverter) {
-        this.clientDTOCollection = clientDTOCollection;
+        this.dtoRepository = dtoRepository;
         this.clientFactory = clientFactory;
         this.clientConverter = clientConverter;
     }
 
     public List<Client> getAllClients() throws IOException {
-        List<IClientDTO> dtos = clientDTOCollection.getAll();
+        List<IClientDTO> dtos = dtoRepository.getAll();
         return clientConverter.convertToClients(dtos);
     }
 
@@ -47,7 +47,7 @@ public class ClientCollection {
     public Client addClient(String naam, LocalDate geboortedatum) throws IOException {
         Client client = this.clientFactory.buildNew(naam, geboortedatum);
         IClientDTO clientDTO = clientConverter.convertToClientDTO(client);
-        clientDTOCollection.add(clientDTO);
+        dtoRepository.add(clientDTO);
         return client;
     }
 

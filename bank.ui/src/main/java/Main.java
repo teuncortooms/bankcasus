@@ -13,8 +13,8 @@ import java.util.UUID;
 public class Main {
     public static void main(String[] args) {
         try {
-            CompositionRoot root = new CompositionRoot();
-            IBank bank = root.getBank();
+            BankApp app = new BankApp();
+            IBank bank = app.getBank();
 
             IClient client1 = bank.getClient(UUID.fromString("a6db2f93-a21a-4adb-a9bf-a03c0561c0bd"));
             IClient client2 = bank.aanmeldenClient("Pietje",

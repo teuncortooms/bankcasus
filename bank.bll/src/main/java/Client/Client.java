@@ -4,7 +4,6 @@ import Exceptions.RekeningNietGevondenException;
 import Rekening.Betaalrekening.Betaalrekening;
 import Rekening.Betaalrekening.IBetaalrekeningFactory;
 import Rekening.Spaarrekening.ISpaarrekeningFactory;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -52,7 +51,6 @@ public class Client implements IClient {
     public void setNaam(String value){this.naam = value;}
     public void setGeboortedatum(LocalDate value){this.geboortedatum = value;}
     public void setClientNummer(UUID value){this.clientNummer = value;}
-
 
     public List<Betaalrekening> getBetaalrekeningen() {
         return this.betaalrekeningen;

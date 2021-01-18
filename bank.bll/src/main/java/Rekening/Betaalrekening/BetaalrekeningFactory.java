@@ -13,7 +13,8 @@ public class BetaalrekeningFactory implements IBetaalrekeningFactory {
     }
 
     @Override
-    public Betaalrekening create(BigDecimal bedrag) {
+    public Betaalrekening create(BigDecimal bedrag)
+    {
         return new Betaalrekening(bedrag, this.spaarrekeningFactory);
     }
 }

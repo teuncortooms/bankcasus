@@ -17,6 +17,5 @@ public interface IClient {
 
     Betaalrekening openBetaalrekening(BigDecimal bedrag);
 
-    Betaalrekening openBetaalrekening(BigDecimal bedrag, ISpaarrekeningFactory spaarrekeningFactory);
     IClient initAfterMap(IBetaalrekeningFactory betaalrekeningFactory);
 }
